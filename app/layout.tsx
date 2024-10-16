@@ -26,8 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" className="bg-gradient-to-t from-black via-[#180101] to-black h-screen">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased border border-gray-300 w-[1536px] mx-auto min-h-screen flex flex-col`}
+      >
         <Header />
         <div className="flex w-full">
           <Sidebar className="w-[20%]" />

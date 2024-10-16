@@ -6,7 +6,7 @@ export default async function ShowTimesForMovie({ params }: { params: { movieId:
   const showtimes = await response.json();
 
   return (
-    <div className="flex w-full flex-wrap gap-3 justify-center border-2 border-red-200">
+    <div className="flex w-full flex-wrap gap-3 justify-center border border-gray-300 ">
       {showtimes.length === 0 ? (
         <h1>No Showtimes</h1>
       ) : (
