@@ -1,6 +1,8 @@
-const Spinner = () => {
+import { cn } from '@/lib/utils';
+
+const Spinner = ({ className = '' }) => {
   return (
-    <div className="w-full h-full flex justify-center items-center" role="status">
+    <div className={cn(`w-full h-full flex justify-center items-center`, className)} role="status">
       <svg
         aria-hidden="true"
         className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
