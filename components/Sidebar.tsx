@@ -9,8 +9,8 @@ const MoviesList = async () => {
 
   return (
     <ul>
-      {movies.map((movie) => (
-        <li key={movie.id} className="py-3 pl-5 border border-gray-300 text-[16px] font-bold">
+      {movies.map((movie: any) => (
+        <li key={movie.id} className="p-3 border border-gray-300 text-[16px] font-bold flex justify-center">
           <Link href={`/movies/${movie.id}/showtimes`}>{movie.title}</Link>
         </li>
       ))}
