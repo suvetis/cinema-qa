@@ -28,11 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-gradient-to-t from-black via-[#180101] to-black h-screen">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased border border-gray-300 mx-auto min-h-screen flex flex-col`}>
-        <Header />
-        <div className="flex w-full border-2 border-red-400">
-          <Sidebar className="w-[23%]" />
-          {children}
-        </div>
+        <main className="container mx-auto max-w-screen-lg">
+          <Header />
+          <div className="flex w-full border-2 border-red-400">
+            <Sidebar className="w-[23%]" />
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );
