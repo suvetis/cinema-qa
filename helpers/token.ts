@@ -17,7 +17,7 @@ export const refreshAccessToken = async () => {
   }
 
   const response = await fetch(
-    "https://cinema.xdatagroup.dev/api/v1/cinema/user/refresh",
+    `${process.env.NEXT_PUBLIC_API_URL}/user/refresh`,
     {
       method: "POST",
       headers: {

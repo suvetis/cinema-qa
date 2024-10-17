@@ -4,9 +4,7 @@ import { Skeleton } from "./ui/skeleton";
 import Link from "next/link";
 
 const MoviesList = async () => {
-  const response = await fetch(
-    "https://cinema.xdatagroup.dev/api/v1/cinema/movies",
-  );
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movies`);
   const movies = await response.json();
 
   return (

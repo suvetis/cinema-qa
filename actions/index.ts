@@ -162,7 +162,7 @@ export async function signOut() {
   const accessToken = cookies().get("accessToken")?.value;
 
   const response = await fetch(
-    "https://cinema.xdatagroup.dev/api/v1/cinema/user/logout",
+    `${process.env.NEXT_PUBLIC_API_URL}/user/logout`,
     {
       method: "POST",
       headers: {

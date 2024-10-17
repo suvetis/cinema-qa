@@ -21,9 +21,8 @@ interface Hall {
 const Header = async () => {
   const auth = await hasAuth();
 
-  const response = await fetch(
-    "https://cinema.xdatagroup.dev/api/v1/cinema/halls",
-  );
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/halls`);
+
   const halls: Hall[] = await response.json();
 
   return (

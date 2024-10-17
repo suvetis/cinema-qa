@@ -1,47 +1,80 @@
 import Link from "next/link";
 import React from "react";
+import { Button } from "./ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import CinemaSeats from "./CinemaSeats";
 
-const ShowTimeCard = ({ showTimeInfo }: any) => {
-  const { movie, startTime, cinemaHall } = showTimeInfo;
+const ShowTimeCard = ({ showTimeInfo, auth }: any) => {
+  const { movie, startTime, cinemaHall, seats } = showTimeInfo;
 
   return (
-    <Link href={`/showtimes/${showTimeInfo.id}`}>
-      <div className="rounded-2xl border border-gray-300 bg-white px-3 py-3 shadow-md">
+    <div className="rounded-2xl border border-gray-300 bg-white px-3 py-3 shadow-md">
+      <div className="flex justify-between">
         <h2 className="pb-1 text-2xl font-bold">{movie.title}</h2>
-        <p> {movie.description}</p>
+        {auth && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button>Book Seats</Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-fit">
+              <DialogHeader>
+                <DialogTitle>Book seats</DialogTitle>
+                <DialogDescription>
+                  Select seats and then click book to confirm your booking.
+                </DialogDescription>
+              </DialogHeader>
+              <CinemaSeats cinemaHall={cinemaHall} seats={seats} />
+              <DialogFooter>
+                <Button type="submit">Confirm booking</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        )}
+      </div>
+      <p> {movie.description}</p>
 
-        <div className="py-2">
-          <p>
-            <span className="font-semibold">Genre: </span> {movie.genre}
-          </p>
-          <p>
-            <span className="font-semibold"> Duration: </span>
-            {movie.duration} minutes
-          </p>
-          <p>
-            <span className="font-semibold"> Rating: </span>
-            {movie.rating}
-          </p>
-        </div>
-
+      <div className="py-2">
         <p>
-          <span className="font-semibold">Cinema Hall: </span>
-          {cinemaHall.name}
+          <span className="font-semibold">Genre: </span> {movie.genre}
         </p>
         <p>
-          <span className="font-semibold">Showtime: </span>
-          {new Date(startTime).toLocaleString()}
-        </p>
-
-        <p>
-          <span className="font-semibold">Director: </span>
-          {movie.director}
+          <span className="font-semibold"> Duration: </span>
+          {movie.duration} minutes
         </p>
         <p>
-          <span className="font-semibold">Cast: </span> {movie.cast.join(", ")}
+          <span className="font-semibold"> Rating: </span>
+          {movie.rating}
         </p>
       </div>
-    </Link>
+
+      <p>
+        <span className="font-semibold">Cinema Hall: </span>
+        {cinemaHall.name}
+      </p>
+      <p>
+        <span className="font-semibold">Showtime: </span>
+        {new Date(startTime).toLocaleString()}
+      </p>
+
+      <p>
+        <span className="font-semibold">Director: </span>
+        {movie.director}
+      </p>
+      <p>
+        <span className="font-semibold">Cast: </span> {movie.cast.join(", ")}
+      </p>
+      <footer className="text-right">
+        <Link href={`/showtimes/${showTimeInfo.id}`}>More Info...</Link>
+      </footer>
+    </div>
   );
 };
 
