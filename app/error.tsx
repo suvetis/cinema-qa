@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
-import Spinner from '@/components/Spinner';
-import { useRouter } from 'next/navigation';
-import { useEffect, useTransition } from 'react';
+import Spinner from "@/components/Spinner";
+import { useRouter } from "next/navigation";
+import { useEffect, useTransition } from "react";
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -13,10 +19,11 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex h-screen w-full flex-col items-center justify-center">
       <h2>Something went wrong!</h2>
+      <h3 className="text-sm">{error?.message}</h3>
       <button
-        className="flex border-2 rounded-md p-2 items-center"
+        className="flex items-center rounded-md border-2 p-2"
         onClick={() => {
           startTransition(() => {
             router.refresh();
@@ -24,7 +31,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           });
         }}
       >
-        {isPending && <Spinner className="h-5 w-5 mr-2" />} Try again
+        {isPending && <Spinner className="mr-2 h-5 w-5" />} Try again
       </button>
     </div>
   );
