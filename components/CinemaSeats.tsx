@@ -1,18 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import * as actions from "@/actions";
+import { Button } from "./ui/button";
+import Spinner from "./Spinner";
+import { DialogClose } from "./ui/dialog";
 
 const CinemaSeats = ({
+  showTimeId,
   seats,
   cinemaHall,
 }: {
+  showTimeId: string;
   seats: string[];
   cinemaHall: object;
 }) => {
   const [bookedSeats, setBookedSeats] = useState([]);
-  const availableSeats = new Set(
-    seats.map((seat) => seat.replace(":Available", "")),
-  );
+  const [bookingErrorMessage, setBookingErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const closeDialogRef = useRef(null);
+
+  const seatLayout = useMemo(() => {
+    const availableSeats = new Set(
+      seats.map((seat) => seat.replace(":Available", "")),
+    );
+    const layout = [];
+    for (let row = 1; row <= cinemaHall.maxRowNumber; row++) {
+      const seatRow = [];
+      for (let seat = 1; seat <= cinemaHall.maxSeatNumber; seat++) {
+        const seatCode = `R${row}:S${seat}`;
+        seatRow.push({
+          code: seatCode,
+          isAvailable: availableSeats.has(seatCode),
+        });
+      }
+      layout.push(seatRow);
+    }
+    return layout;
+  }, [cinemaHall.maxRowNumber, cinemaHall.maxSeatNumber, seats]);
 
   function handleSeatClick(rowIndex, seatIndex) {
     setBookedSeats((prev) => {
@@ -36,51 +61,68 @@ const CinemaSeats = ({
     return seatIndexInBooked !== -1;
   }
 
-  const seatLayout = [];
-  for (let row = 1; row <= cinemaHall.maxRowNumber; row++) {
-    const seatRow = [];
-    for (let seat = 1; seat <= cinemaHall.maxSeatNumber; seat++) {
-      const seatCode = `R${row}:S${seat}`;
-      seatRow.push({
-        code: seatCode,
-        isAvailable: availableSeats.has(seatCode),
+  const handleConfirm = async () => {
+    try {
+      setIsLoading(true);
+      setBookingErrorMessage("");
+      await actions.confirmBooking({
+        showTimeId,
+        seats: bookedSeats,
       });
+      setTimeout(() => {
+        closeDialogRef.current?.click();
+      }, 500);
+    } catch (error) {
+      setBookingErrorMessage(error?.message);
+    } finally {
+      setIsLoading(false);
     }
-    seatLayout.push(seatRow);
-  }
+  };
 
   return (
-    <div className="w-full overflow-x-auto">
-      {JSON.stringify(bookedSeats, null, 2)}
-      <h2 className="mb-4 text-center text-xl font-bold">{cinemaHall.name}</h2>
-      <div className="flex flex-col items-center gap-2">
-        {seatLayout.map((seatRow, rowIndex) => (
-          <div className="flex w-full max-w-fit gap-2" key={rowIndex}>
-            {seatRow.map(({ code, isAvailable }, seatIndex) =>
-              !isAvailable ? (
-                <div
-                  key={code}
-                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-500 transition-colors duration-200`}
-                >
-                  X
-                </div>
-              ) : (
-                <div
-                  key={code}
-                  onClick={() => handleSeatClick(rowIndex + 1, seatIndex + 1)}
-                  className={`h-5 w-5 shrink-0 rounded-full transition-colors duration-200 ${
-                    !isSelected(rowIndex + 1, seatIndex + 1)
-                      ? "bg-green-500"
-                      : "bg-blue-500"
-                  }`}
-                  title={code}
-                ></div>
-              ),
-            )}
-          </div>
-        ))}
+    <>
+      <div className="w-full overflow-x-auto">
+        <h2 className="mb-4 text-center text-xl font-bold">
+          {cinemaHall.name}
+        </h2>
+        <div className="flex flex-col items-center gap-2">
+          {seatLayout.map((seatRow, rowIndex) => (
+            <div className="flex w-full max-w-fit gap-2" key={rowIndex}>
+              {seatRow.map(({ code, isAvailable }, seatIndex) =>
+                !isAvailable ? (
+                  <div
+                    key={code}
+                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-500 transition-colors duration-200`}
+                  >
+                    X
+                  </div>
+                ) : (
+                  <div
+                    key={code}
+                    onClick={() => handleSeatClick(rowIndex + 1, seatIndex + 1)}
+                    className={`h-5 w-5 shrink-0 rounded-full transition-colors duration-200 ${
+                      !isSelected(rowIndex + 1, seatIndex + 1)
+                        ? "bg-green-500"
+                        : "bg-blue-500"
+                    }`}
+                    title={code}
+                  ></div>
+                ),
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <p className="text-center text-red-500">{bookingErrorMessage}</p>
+      <Button onClick={handleConfirm}>
+        {isLoading ? <Spinner /> : "Confirm"}
+      </Button>
+      <DialogClose ref={closeDialogRef} className="invisible absolute" asChild>
+        <Button type="button" variant="secondary">
+          Close
+        </Button>
+      </DialogClose>
+    </>
   );
 };
 
