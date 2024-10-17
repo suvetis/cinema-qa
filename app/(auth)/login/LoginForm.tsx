@@ -13,7 +13,9 @@ const LoginForm = () => {
     <form action={action}>
       <div className="grid gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
+          <Label className="font-semibold" htmlFor="email">
+            Email
+          </Label>
           <Input
             id="email"
             type="email"
@@ -24,7 +26,9 @@ const LoginForm = () => {
           <span>{formState.errors.email?.join(", ")}</span>
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
+          <Label className="font-semibold" htmlFor="password">
+            Password
+          </Label>
           <Input id="password" type="password" name="password" required />
           <span>{formState.errors.password?.join(", ")}</span>
         </div>

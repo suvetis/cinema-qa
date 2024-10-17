@@ -9,9 +9,9 @@ import SignupForm from "./SignupForm";
 
 export default function LoginForm() {
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto mt-5 h-fit max-w-sm shadow-md">
       <CardHeader>
-        <CardTitle className="text-xl">Sign Up</CardTitle>
+        <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
         <CardDescription>Enter your information to register</CardDescription>
       </CardHeader>
       <CardContent>
