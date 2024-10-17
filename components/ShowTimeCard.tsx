@@ -1,41 +1,45 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
 const ShowTimeCard = ({ showTimeInfo }: any) => {
   const { movie, startTime, cinemaHall } = showTimeInfo;
 
   return (
     <Link href={`/showtimes/${showTimeInfo.id}`}>
-      <div className="max-w-xs bg-white rounded-lg shadow-md">
-        <div className="bg-gray-100 p-4">
-          <p className="text-gray-600">
-            Showtime: <span className="font-semibold">{new Date(startTime).toLocaleString()}</span>
+      <div className="rounded-2xl border border-gray-300 bg-white px-3 py-3 shadow-md">
+        <h2 className="pb-1 text-2xl font-bold">{movie.title}</h2>
+        <p> {movie.description}</p>
+
+        <div className="py-2">
+          <p>
+            <span className="font-semibold">Genre: </span> {movie.genre}
           </p>
-          <p className="text-gray-600">
-            Cinema Hall: <span className="font-semibold">{cinemaHall.name}</span>
+          <p>
+            <span className="font-semibold"> Duration: </span>
+            {movie.duration} minutes
+          </p>
+          <p>
+            <span className="font-semibold"> Rating: </span>
+            {movie.rating}
           </p>
         </div>
 
-        <div className="p-4">
-          <h2 className="text-xl font-bold text-gray-800">{movie.title}</h2>
-          <p className="text-gray-600">
-            Genre: <span className="font-semibold">{movie.genre}</span>
-          </p>
-          <p className="text-gray-600">
-            Duration: <span className="font-semibold">{movie.duration} minutes</span>
-          </p>
-          <p className="text-gray-600">
-            Rating: <span className="font-semibold">{movie.rating}</span>
-          </p>
-          <p className="mt-2 text-gray-700">Description: {movie.description}</p>
-          <p className="mt-2 text-gray-600">
-            Director: <span className="font-semibold">{movie.director}</span>
-          </p>
-          <p className="mt-2 text-gray-600">
-            Cast:
-            <span className="font-semibold">{movie.cast.join(', ')}</span>
-          </p>
-        </div>
+        <p>
+          <span className="font-semibold">Cinema Hall: </span>
+          {cinemaHall.name}
+        </p>
+        <p>
+          <span className="font-semibold">Showtime: </span>
+          {new Date(startTime).toLocaleString()}
+        </p>
+
+        <p>
+          <span className="font-semibold">Director: </span>
+          {movie.director}
+        </p>
+        <p>
+          <span className="font-semibold">Cast: </span> {movie.cast.join(", ")}
+        </p>
       </div>
     </Link>
   );

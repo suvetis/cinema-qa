@@ -61,7 +61,10 @@ const Header = async () => {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Link className="text-white" href="/login">
+        <Link
+          className="flex flex-grow items-center justify-center pl-10 font-semibold text-gray-200"
+          href="/login"
+        >
           Login
         </Link>
       )}

@@ -1,16 +1,21 @@
-import { cn } from '@/lib/utils';
-import React, { Suspense } from 'react';
-import { Skeleton } from './ui/skeleton';
-import Link from 'next/link';
+import { cn } from "@/lib/utils";
+import React, { Suspense } from "react";
+import { Skeleton } from "./ui/skeleton";
+import Link from "next/link";
 
 const MoviesList = async () => {
-  const response = await fetch('https://cinema.xdatagroup.dev/api/v1/cinema/movies');
+  const response = await fetch(
+    "https://cinema.xdatagroup.dev/api/v1/cinema/movies",
+  );
   const movies = await response.json();
 
   return (
     <ul>
       {movies.map((movie: any) => (
-        <li key={movie.id} className="p-3 border border-gray-300 text-[16px] font-bold flex justify-center">
+        <li
+          key={movie.id}
+          className="flex border border-gray-300 p-3 text-[16px] font-bold"
+        >
           <Link href={`/movies/${movie.id}/showtimes`}>{movie.title}</Link>
         </li>
       ))}
@@ -18,12 +23,12 @@ const MoviesList = async () => {
   );
 };
 
-const Sidebar = ({ className = '' }) => {
+const Sidebar = ({ className = "" }) => {
   return (
-    <div className={cn('', className)}>
+    <div className={cn("", className)}>
       <Suspense
         fallback={
-          <div className="space-y-10 h-screen flex flex-col justify-center">
+          <div className="flex h-screen flex-col justify-center space-y-10">
             <Skeleton className="h-4" />
             <Skeleton className="h-4" />
             <Skeleton className="h-4" />

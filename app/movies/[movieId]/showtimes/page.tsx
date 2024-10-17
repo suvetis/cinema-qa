@@ -1,16 +1,24 @@
-import ShowTimeCard from '@/components/ShowTimeCard';
+import ShowTimeCard from "@/components/ShowTimeCard";
 
-export default async function ShowTimesForMovie({ params }: { params: { movieId: string } }) {
+export default async function ShowTimesForMovie({
+  params,
+}: {
+  params: { movieId: string };
+}) {
   const movieId = params.movieId;
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movies/${movieId}/showtimes`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/movies/${movieId}/showtimes`,
+  );
   const showtimes = await response.json();
 
   return (
-    <div className="flex w-full flex-wrap gap-3 justify-center border border-gray-300 ">
+    <div className="flex w-full flex-col flex-wrap gap-4 border border-gray-300 bg-gradient-to-t from-black via-[#180101] to-black px-2 py-3">
       {showtimes.length === 0 ? (
-        <h1>No Showtimes</h1>
+        <h1 className="flex justify-center text-white">No Showtimes</h1>
       ) : (
-        showtimes.map((showtime: any) => <ShowTimeCard key={showtime.id} showTimeInfo={showtime} />)
+        showtimes.map((showtime: any) => (
+          <ShowTimeCard key={showtime.id} showTimeInfo={showtime} />
+        ))
       )}
     </div>
   );
