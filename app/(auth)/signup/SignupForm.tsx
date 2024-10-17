@@ -14,7 +14,9 @@ const SignupForm = () => {
       <div className="grid gap-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="first-name">First name</Label>
+            <Label htmlFor="first-name" className="font-semibold">
+              First name
+            </Label>
             <Input
               id="first-name"
               placeholder="Max"
@@ -23,7 +25,9 @@ const SignupForm = () => {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="last-name">Last name</Label>
+            <Label htmlFor="last-name" className="font-semibold">
+              Last name
+            </Label>
             <Input
               id="last-name"
               placeholder="Robinson"
@@ -33,7 +37,9 @@ const SignupForm = () => {
           </div>
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className="font-semibold">
+            Email
+          </Label>
           <Input
             id="email"
             type="email"
@@ -43,7 +49,9 @@ const SignupForm = () => {
           />
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password" className="font-semibold">
+            Password
+          </Label>
           <Input id="password" name="password" type="password" />
         </div>
         {formState.errors._form ? (

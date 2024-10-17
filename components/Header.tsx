@@ -66,7 +66,9 @@ const Header = async () => {
           className="flex flex-grow items-center justify-center pl-10 font-semibold text-gray-200"
           href="/login"
         >
-          Login
+          <button className="mr-2 rounded-3xl border-2 border-gray-300 px-8 py-2 transition-colors duration-200 hover:bg-gray-300 hover:text-black">
+            Login
+          </button>
         </Link>
       )}
     </div>

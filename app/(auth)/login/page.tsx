@@ -18,9 +18,9 @@ export default async function LoginPage() {
   }
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto mt-5 h-fit max-w-sm shadow-md">
       <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
+        <CardTitle className="text-2xl font-bold">Login</CardTitle>
         <CardDescription>
           Enter your email below to login to your account
         </CardDescription>
