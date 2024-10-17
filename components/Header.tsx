@@ -51,7 +51,9 @@ const Header = async () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>My Bookings</DropdownMenuItem>
+            <Link href="/bookings">
+              <DropdownMenuItem>My Bookings</DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
             <form action={actions.signOut}>
               <button className="w-full" type="submit">

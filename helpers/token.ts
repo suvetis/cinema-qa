@@ -1,10 +1,19 @@
 import { cookies } from "next/headers";
+import { jwtDecode } from "jwt-decode";
+import { redirect } from "next/navigation";
 
 export const refreshAccessToken = async () => {
   const refreshToken = cookies().get("refreshToken")?.value;
-
   if (!refreshToken) {
     throw new Error("No refresh token available");
+  }
+  const decodedToken = jwtDecode(refreshToken);
+  const expirationDate = new Date(decodedToken?.exp * 1000);
+
+  if (expirationDate <= new Date()) {
+    cookies().delete("refreshToken");
+    cookies().delete("accessToken");
+    redirect("/");
   }
 
   const response = await fetch(
@@ -19,7 +28,8 @@ export const refreshAccessToken = async () => {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to refresh access token");
+    cookies().delete("refreshToken");
+    redirect("/");
   }
 
   const data = await response.json();
@@ -40,8 +50,8 @@ export const hasAuth = async () => {
 
   if (!accessToken && refreshToken) {
     try {
-      const token = await refreshAccessToken();
-      return token;
+      const refreshedAccessToken = await refreshAccessToken();
+      return refreshedAccessToken;
     } catch (error) {
       console.error("Error refreshing access token:", error);
     }
