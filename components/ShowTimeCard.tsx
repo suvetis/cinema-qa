@@ -13,7 +13,7 @@ import {
 import CinemaSeats from "./CinemaSeats";
 
 const ShowTimeCard = ({ showTimeInfo, auth }: any) => {
-  const { movie, startTime, cinemaHall, seats } = showTimeInfo;
+  const { movie, startTime, cinemaHall, seats, id } = showTimeInfo;
 
   return (
     <div className="h-fit w-full rounded-2xl border border-gray-300 bg-white p-3 shadow-md">
@@ -31,10 +31,11 @@ const ShowTimeCard = ({ showTimeInfo, auth }: any) => {
                   Select seats and then click book to confirm your booking.
                 </DialogDescription>
               </DialogHeader>
-              <CinemaSeats cinemaHall={cinemaHall} seats={seats} />
-              <DialogFooter>
-                <Button type="submit">Confirm booking</Button>
-              </DialogFooter>
+              <CinemaSeats
+                showTimeId={id}
+                cinemaHall={cinemaHall}
+                seats={seats}
+              />
             </DialogContent>
           </Dialog>
         )}

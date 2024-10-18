@@ -180,3 +180,23 @@ export async function signOut() {
   cookies().delete("refreshToken");
   redirect("/");
 }
+
+export async function confirmBooking(bookingPayload: any) {
+  const accessToken = cookies().get("accessToken")?.value;
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(bookingPayload),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to make booking");
+  }
+
+  const result = await response.json();
+  return result;
+}
