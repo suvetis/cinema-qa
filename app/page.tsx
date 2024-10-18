@@ -8,7 +8,7 @@ export default async function Home() {
   const auth = await hasAuth();
 
   return (
-    <div className="flex w-full flex-wrap gap-3 px-3 py-3">
+    <div className="flex w-full flex-col gap-3 border border-gray-300 bg-gradient-to-t from-black via-[#180101] to-black p-3">
       {showtimes.map((showtime) => (
         <ShowTimeCard auth={!!auth} key={showtime.id} showTimeInfo={showtime} />
       ))}

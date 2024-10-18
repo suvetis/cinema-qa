@@ -16,7 +16,7 @@ const ShowTimeCard = ({ showTimeInfo, auth }: any) => {
   const { movie, startTime, cinemaHall, seats } = showTimeInfo;
 
   return (
-    <div className="rounded-2xl border border-gray-300 bg-white px-3 py-3 shadow-md">
+    <div className="h-fit w-full rounded-2xl border border-gray-300 bg-white p-3 shadow-md">
       <div className="flex justify-between">
         <h2 className="pb-1 text-2xl font-bold">{movie.title}</h2>
         {auth && (
@@ -72,7 +72,11 @@ const ShowTimeCard = ({ showTimeInfo, auth }: any) => {
         <span className="font-semibold">Cast: </span> {movie.cast.join(", ")}
       </p>
       <footer className="text-right">
-        <Link href={`/showtimes/${showTimeInfo.id}`}>More Info...</Link>
+        <Link href={`/showtimes/${showTimeInfo.id}`}>
+          <button className="mt-5 w-full rounded-lg border-2 border-black py-1 text-lg font-semibold shadow-md hover:bg-black hover:text-white">
+            More Info...
+          </button>
+        </Link>
       </footer>
     </div>
   );
