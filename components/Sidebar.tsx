@@ -9,7 +9,7 @@ const MoviesList = async () => {
 
   return (
     <ul>
-      {movies.map((movie: any) => (
+      {movies.map((movie) => (
         <li
           key={movie.id}
           className="flex border border-gray-300 p-3 text-[16px] font-bold"

@@ -16,7 +16,7 @@ export default async function ShowTimesForMovie({
       {showtimes.length === 0 ? (
         <h1 className="flex justify-center text-white">No Showtimes</h1>
       ) : (
-        showtimes.map((showtime: any) => (
+        showtimes.map((showtime) => (
           <ShowTimeCard key={showtime.id} showTimeInfo={showtime} />
         ))
       )}

@@ -30,7 +30,7 @@ const BookingsPage = async () => {
       {bookings.length === 0 ? (
         <h1>No Bookings</h1>
       ) : (
-        bookings.map((bkng: any) => <div>{bkng?.userId}</div>)
+        bookings.map((bkng) => <div key={bkng?.userId}>{bkng?.userId}</div>)
       )}
     </div>
   );

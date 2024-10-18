@@ -13,20 +13,20 @@ const CinemaSeats = ({
 }: {
   showTimeId: string;
   seats: string[];
-  cinemaHall: object;
+  cinemaHall: any;
 }) => {
   const [bookedSeats, setBookedSeats] = useState([]);
   const [bookingErrorMessage, setBookingErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const closeDialogRef = useRef(null);
+  const closeDialogRef = useRef<any>(null);
 
   const seatLayout = useMemo(() => {
     const availableSeats = new Set(
       seats.map((seat) => seat.replace(":Available", "")),
     );
-    const layout = [];
-    for (let row = 1; row <= cinemaHall.maxRowNumber; row++) {
-      const seatRow = [];
+    const layout = [] as any[];
+    for (let row = 1; row <= cinemaHall?.maxRowNumber; row++) {
+      const seatRow = [] as any[];
       for (let seat = 1; seat <= cinemaHall.maxSeatNumber; seat++) {
         const seatCode = `R${row}:S${seat}`;
         seatRow.push({
@@ -40,7 +40,7 @@ const CinemaSeats = ({
   }, [cinemaHall.maxRowNumber, cinemaHall.maxSeatNumber, seats]);
 
   function handleSeatClick(rowIndex, seatIndex) {
-    setBookedSeats((prev) => {
+    setBookedSeats((prev: any) => {
       const seatIndexInBooked = prev.findIndex(
         (seat) => seat.rowNumber === rowIndex && seat.seatNumber === seatIndex,
       );
@@ -55,7 +55,7 @@ const CinemaSeats = ({
 
   function isSelected(rNumber, sNumber) {
     const seatIndexInBooked = bookedSeats.findIndex(
-      (seat) => seat.rowNumber === rNumber && seat.seatNumber === sNumber,
+      (seat: any) => seat.rowNumber === rNumber && seat.seatNumber === sNumber,
     );
 
     return seatIndexInBooked !== -1;
@@ -72,7 +72,7 @@ const CinemaSeats = ({
       setTimeout(() => {
         closeDialogRef.current?.click();
       }, 500);
-    } catch (error) {
+    } catch (error: any) {
       setBookingErrorMessage(error?.message);
     } finally {
       setIsLoading(false);

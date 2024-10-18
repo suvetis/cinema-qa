@@ -10,7 +10,7 @@ import {
 import { Button } from "./ui/button";
 import CinemaSeats from "./CinemaSeats";
 
-const BookingButtonWithDialog = ({ showtime }: any) => {
+const BookingButtonWithDialog = ({ showtime }) => {
   const { cinemaHall, seats, id } = showtime;
 
   return (

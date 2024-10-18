@@ -3,7 +3,7 @@ import React from "react";
 import { hasAuth } from "@/helpers/token";
 import BookingButtonWithDialog from "./BookingButtonWithDialog";
 
-const ShowTimeCard = async ({ showTimeInfo }: any) => {
+const ShowTimeCard = async ({ showTimeInfo }) => {
   const auth = await hasAuth();
   const { movie, cinemaHall, seats, id } = showTimeInfo;
 

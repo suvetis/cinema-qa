@@ -3,17 +3,26 @@ import { jwtDecode } from "jwt-decode";
 import { redirect } from "next/navigation";
 
 export const refreshAccessToken = async () => {
+  function backToHome() {
+    cookies().delete("refreshToken");
+    cookies().delete("accessToken");
+    redirect("/");
+  }
+
   const refreshToken = cookies().get("refreshToken")?.value;
   if (!refreshToken) {
     throw new Error("No refresh token available");
   }
   const decodedToken = jwtDecode(refreshToken);
+  if (!decodedToken.exp) {
+    backToHome();
+    return;
+  }
+
   const expirationDate = new Date(decodedToken?.exp * 1000);
 
   if (expirationDate <= new Date()) {
-    cookies().delete("refreshToken");
-    cookies().delete("accessToken");
-    redirect("/");
+    backToHome();
   }
 
   const response = await fetch(
