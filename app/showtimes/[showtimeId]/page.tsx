@@ -1,3 +1,6 @@
+import BookingButtonWithDialog from "@/components/BookingButtonWithDialog";
+import { hasAuth } from "@/helpers/token";
+
 export default async function ShowTimePage({
   params,
 }: {
@@ -8,6 +11,7 @@ export default async function ShowTimePage({
     `${process.env.NEXT_PUBLIC_API_URL}/showtimes/${showtimeId}`,
   );
   const showtime = await response.json();
+  const auth = await hasAuth();
   const { movie, startTime, cinemaHall } = showtime;
 
   return (
@@ -44,6 +48,12 @@ export default async function ShowTimePage({
       <p>
         <span className="font-semibold">Cast: </span> {movie.cast.join(", ")}
       </p>
+
+      {auth && (
+        <div className="w-full text-right">
+          <BookingButtonWithDialog showtime={showtime} />
+        </div>
+      )}
     </div>
   );
 }

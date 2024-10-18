@@ -26,7 +26,7 @@ const Header = async () => {
   const halls: Hall[] = await response.json();
 
   return (
-    <div className="flex justify-between bg-[#000000]">
+    <div className="flex items-center justify-between bg-black">
       <Link href="/" className="border-r-[1px] border-gray-300 py-1">
         <LogoSvg />
       </Link>
@@ -45,7 +45,11 @@ const Header = async () => {
       {auth ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
+            <Button
+              variant="secondary"
+              size="icon"
+              className="relative right-2 shrink-0 rounded-full"
+            >
               <CircleUser className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
