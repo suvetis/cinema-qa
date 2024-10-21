@@ -27,7 +27,7 @@ const Header = async () => {
   const halls: Hall[] = await response.json();
 
   return (
-    <div className="flex items-center justify-between bg-black">
+    <div className="flex items-center justify-between border border-gray-300 bg-black">
       <Link href="/" className="border-r-[1px] border-gray-300 py-1">
         <LogoSvg />
       </Link>

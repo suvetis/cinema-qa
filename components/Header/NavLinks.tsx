@@ -19,6 +19,18 @@ const NavLinks = ({ halls }) => {
     );
   }
 
+  if (pathname.includes("/login")) {
+    return (
+      <div className="text-xl font-semibold text-gray-200">Login Page</div>
+    );
+  }
+
+  if (pathname.includes("/signup")) {
+    return (
+      <div className="text-xl font-semibold text-gray-200">Sign Up Page</div>
+    );
+  }
+
   return (
     <ul className="flex w-full items-stretch px-5">
       {halls.map((hall: Hall) => (

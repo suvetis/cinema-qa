@@ -5,6 +5,7 @@ import * as actions from "@/actions";
 import { Button } from "./ui/button";
 import Spinner from "./Spinner";
 import { DialogClose } from "./ui/dialog";
+import { usePathname } from "next/navigation";
 
 const CinemaSeats = ({
   showTimeId,
@@ -15,8 +16,10 @@ const CinemaSeats = ({
   seats: string[];
   cinemaHall: any;
 }) => {
+  const pathname = usePathname();
   const [bookedSeats, setBookedSeats] = useState([]);
   const [bookingErrorMessage, setBookingErrorMessage] = useState("");
+  const [bookingSuccessMessage, setBookingSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const closeDialogRef = useRef<any>(null);
 
@@ -65,13 +68,17 @@ const CinemaSeats = ({
     try {
       setIsLoading(true);
       setBookingErrorMessage("");
-      await actions.confirmBooking({
-        showTimeId,
-        seats: bookedSeats,
-      });
+      await actions.confirmBooking(
+        {
+          showtimeId: showTimeId,
+          seats: bookedSeats,
+        },
+        pathname,
+      );
+      setBookingSuccessMessage("Booked successfully!");
       setTimeout(() => {
         closeDialogRef.current?.click();
-      }, 500);
+      }, 900);
     } catch (error: any) {
       setBookingErrorMessage(error?.message);
     } finally {
@@ -114,6 +121,7 @@ const CinemaSeats = ({
         </div>
       </div>
       <p className="text-center text-red-500">{bookingErrorMessage}</p>
+      <p className="text-center text-green-500">{bookingSuccessMessage}</p>
       <Button onClick={handleConfirm}>
         {isLoading ? <Spinner /> : "Confirm"}
       </Button>

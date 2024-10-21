@@ -1,4 +1,5 @@
 import BookingButtonWithDialog from "@/components/BookingButtonWithDialog";
+import { formatDateTime } from "@/helpers/formats";
 import { hasAuth } from "@/helpers/token";
 
 export default async function ShowTimePage({
@@ -39,7 +40,7 @@ export default async function ShowTimePage({
       </p>
       <p>
         <span className="font-semibold">Showtime: </span>
-        {new Date(startTime).toLocaleString()}
+        {formatDateTime(startTime)}
       </p>
       <p>
         <span className="font-semibold">Director: </span>

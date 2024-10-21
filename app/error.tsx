@@ -19,7 +19,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center">
+    <div className="flex h-screen w-full flex-col items-center justify-center text-gray-400">
       <h2>Something went wrong!</h2>
       <button
         className="flex items-center rounded-md border-2 p-2"

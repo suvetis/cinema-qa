@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -181,7 +182,7 @@ export async function signOut() {
   redirect("/");
 }
 
-export async function confirmBooking(bookingPayload: any) {
+export async function confirmBooking(bookingPayload: any, pathname) {
   const accessToken = cookies().get("accessToken")?.value;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
@@ -198,5 +199,6 @@ export async function confirmBooking(bookingPayload: any) {
   }
 
   const result = await response.json();
+  revalidatePath(pathname);
   return result;
 }
