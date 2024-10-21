@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import LogoSvg from "@/components/svgs/Logo";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { CircleUser } from "lucide-react";
 import {
   DropdownMenu,
@@ -9,11 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 import * as actions from "@/actions";
 import { hasAuth } from "@/helpers/token";
+import NavLinks from "./NavLinks";
 
-interface Hall {
+export interface Hall {
   id: number;
   name: string;
 }
@@ -30,18 +31,7 @@ const Header = async () => {
       <Link href="/" className="border-r-[1px] border-gray-300 py-1">
         <LogoSvg />
       </Link>
-      <ul className="flex w-full items-stretch px-5">
-        {halls.map((hall: Hall, index: number) => (
-          <li
-            key={hall.id}
-            className={`flex-grow text-xl font-semibold text-gray-200 ${
-              index < halls.length - 1 ? "border-r-[1px] border-gray-300" : ""
-            } flex items-center justify-center`}
-          >
-            {hall.name}
-          </li>
-        ))}
-      </ul>
+      <NavLinks halls={halls} />
       {auth ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
