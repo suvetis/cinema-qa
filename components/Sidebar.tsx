@@ -23,7 +23,7 @@ const MoviesList = async () => {
 
 const Sidebar = ({ className = "" }) => {
   return (
-    <div className={cn("", className)}>
+    <div className={cn("overflow-y-scroll bg-white", className)}>
       <Suspense
         fallback={
           <div className="flex h-screen flex-col justify-center space-y-10">

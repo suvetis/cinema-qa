@@ -15,7 +15,7 @@ export default async function ShowTimePage({
   const { movie, startTime, cinemaHall } = showtime;
 
   return (
-    <div className="mx-3 my-3 h-fit w-full rounded-2xl border border-gray-300 bg-white px-3 py-3 shadow-md">
+    <div className="h-fit w-full rounded-2xl border border-gray-300 bg-white px-3 py-3 shadow-md">
       <h2 className="pb-1 text-2xl font-bold">{movie.title}</h2>
       <p> {movie.description}</p>
 
