@@ -7,6 +7,18 @@ const NavLinks = ({ halls }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  if (pathname.includes("/showtimes")) {
+    return (
+      <div className="text-xl font-semibold text-gray-200">Movie Details</div>
+    );
+  }
+
+  if (pathname.includes("/bookings")) {
+    return (
+      <div className="text-xl font-semibold text-gray-200">Booking Detials</div>
+    );
+  }
+
   return (
     <ul className="flex w-full items-stretch px-5">
       {halls.map((hall: Hall) => (
@@ -21,7 +33,7 @@ const NavLinks = ({ halls }) => {
       <li
         key="all"
         className={`flex-grow cursor-pointer text-xl font-semibold text-gray-200 ${searchParams.get("hall") === null && "text-yellow-400"} flex items-center justify-center`}
-        onClick={() => router.push(`/`)}
+        onClick={() => router.push(pathname)}
       >
         All
       </li>

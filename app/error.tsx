@@ -21,7 +21,6 @@ export default function Error({
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center">
       <h2>Something went wrong!</h2>
-      <h3 className="text-sm">{error?.message}</h3>
       <button
         className="flex items-center rounded-md border-2 p-2"
         onClick={() => {
