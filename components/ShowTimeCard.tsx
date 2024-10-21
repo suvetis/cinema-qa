@@ -26,8 +26,8 @@ const ShowTimeCard = async ({ showTimeInfo }) => {
           {movie.duration} minutes
         </p>
         <p>
-          <span className="font-semibold"> Rating: </span>
-          {movie.rating}
+          <span className="font-semibold">Cinema Hall: </span>
+          {cinemaHall.name}
         </p>
       </div>
 

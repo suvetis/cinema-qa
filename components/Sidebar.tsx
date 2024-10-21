@@ -11,12 +11,11 @@ const MoviesList = async () => {
   return (
     <ul>
       {movies.map((movie) => (
-        <li
-          key={movie.id}
-          className="flex border border-gray-300 p-3 text-[16px] font-bold"
-        >
-          <Link href={`/movies/${movie.id}/showtimes`}>{movie.title}</Link>
-        </li>
+        <Link key={movie.id} href={`/movies/${movie.id}/showtimes`}>
+          <li className="flex border border-gray-300 p-3 text-[16px] font-bold hover:bg-[#f4f4f5]">
+            {movie.title}
+          </li>
+        </Link>
       ))}
     </ul>
   );

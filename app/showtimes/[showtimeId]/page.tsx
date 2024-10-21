@@ -15,7 +15,7 @@ export default async function ShowTimePage({
   const { movie, startTime, cinemaHall } = showtime;
 
   return (
-    <div className="h-fit w-full rounded-2xl border border-gray-300 bg-white px-3 py-3 shadow-md">
+    <div className="m-3 h-fit rounded-2xl border border-gray-300 bg-white p-3 shadow-md">
       <h2 className="pb-1 text-2xl font-bold">{movie.title}</h2>
       <p> {movie.description}</p>
 
@@ -28,14 +28,14 @@ export default async function ShowTimePage({
           {movie.duration} minutes
         </p>
         <p>
-          <span className="font-semibold"> Rating: </span>
-          {movie.rating}
+          <span className="font-semibold">Cinema Hall: </span>
+          {cinemaHall.name}
         </p>
       </div>
 
       <p>
-        <span className="font-semibold">Cinema Hall: </span>
-        {cinemaHall.name}
+        <span className="font-semibold"> Rating: </span>
+        {movie.rating}
       </p>
       <p>
         <span className="font-semibold">Showtime: </span>
