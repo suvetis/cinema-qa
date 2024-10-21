@@ -16,7 +16,7 @@ const BookingButtonWithDialog = ({ showtime }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Book Seats</Button>
+        <Button className="mb-2">Book Seats</Button>
       </DialogTrigger>
       <DialogContent className="max-w-fit">
         <DialogHeader>

@@ -12,7 +12,7 @@ export default async function ShowTimesForMovie({
   const showtimes = await response.json();
 
   return (
-    <div className="flex w-full flex-col flex-wrap gap-4 border border-gray-300 bg-gradient-to-t from-black via-[#180101] to-black p-3">
+    <div className="flex w-full flex-col flex-wrap gap-4 bg-gradient-to-t from-black via-[#180101] to-black p-3">
       {showtimes.length === 0 ? (
         <h1 className="flex justify-center text-white">No Showtimes</h1>
       ) : (
