@@ -2,6 +2,8 @@ import BookingButtonWithDialog from "@/components/BookingButtonWithDialog";
 import { formatDateTime } from "@/helpers/formats";
 import { hasAuth } from "@/helpers/token";
 
+
+
 export default async function ShowTimePage({
   params,
 }: {
@@ -10,9 +12,11 @@ export default async function ShowTimePage({
   const showtimeId = params.showtimeId;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/showtimes/${showtimeId}`,
+    { cache: 'no-store', next: { revalidate: 0 } }
   );
   const showtime = await response.json();
   const auth = await hasAuth();
+  console.log("TEST", `${process.env.NEXT_PUBLIC_API_URL}/showtimes/${showtimeId}`, showtime)
   const { movie, startTime, cinemaHall } = showtime;
 
   return (
