@@ -1,5 +1,7 @@
 import ShowTimeCard from "@/components/ShowTimeCard";
 
+export const revalidate = 0;
+
 export default async function ShowTimesForMovie({
   params,
   searchParams,
